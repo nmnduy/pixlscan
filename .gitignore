@@ -1,0 +1,35 @@
+# Build directories and files
+/build/
+/CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# Object files, libraries, and executables
+*.o
+*.obj
+*.so
+*.dll
+*.dylib
+*.a
+*.lib
+*.exe
+
+# IDE/editor specific files
+*.vcxproj*
+*.sln
+.idea/
+.vscode/
+*.code-workspace
+
+# Miscellaneous
+*.log
+*.tmp
+*.swp
+tags
+
+qdarkstyle/
+fontawesome-free-6.7.2-web/
+logs/
+.envrc
