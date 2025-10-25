@@ -51,3 +51,36 @@ target_sources(${PROJECT_NAME} PRIVATE ${ICON_RESOURCES})
 
 # Copy QDarkStyleSheet QSS into build directory
 configure_file(${CMAKE_SOURCE_DIR}/qdarkstyle/dark/darkstyle.qss ${CMAKE_BINARY_DIR}/darkstyle.qss COPYONLY)
+
+# ===== Platform-specific packaging configuration =====
+
+if(APPLE)
+    # macOS app bundle configuration
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        MACOSX_BUNDLE TRUE
+        MACOSX_BUNDLE_GUI_IDENTIFIER "com.pixlscan.app"
+        MACOSX_BUNDLE_BUNDLE_NAME "PixlScan"
+        MACOSX_BUNDLE_BUNDLE_VERSION "1.0.0"
+        MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
+        MACOSX_BUNDLE_INFO_STRING "Document scanner and image processor"
+    )
+
+    # Install darkstyle.qss into the bundle Resources
+    install(FILES ${CMAKE_BINARY_DIR}/darkstyle.qss
+            DESTINATION pixlscan.app/Contents/Resources)
+
+    # Install the executable target
+    install(TARGETS ${PROJECT_NAME} BUNDLE DESTINATION .)
+elseif(UNIX)
+    # Linux installation paths
+    install(TARGETS ${PROJECT_NAME} DESTINATION bin)
+    install(FILES ${CMAKE_BINARY_DIR}/darkstyle.qss DESTINATION share/pixlscan)
+
+    # Install desktop file and icon if they exist
+    if(EXISTS "${CMAKE_SOURCE_DIR}/pixlscan.desktop")
+        install(FILES pixlscan.desktop DESTINATION share/applications)
+    endif()
+    if(EXISTS "${CMAKE_SOURCE_DIR}/pixlscan.png")
+        install(FILES pixlscan.png DESTINATION share/icons/hicolor/256x256/apps)
+    endif()
+endif()

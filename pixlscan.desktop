@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=PixlScan
+GenericName=Document Scanner
+Comment=Scan and process documents with automatic edge detection
+Exec=pixlscan %F
+Icon=pixlscan
+Terminal=false
+Categories=Graphics;Photography;Qt;
+MimeType=image/png;image/jpeg;image/jpg;image/bmp;
+Keywords=scan;document;image;opencv;
